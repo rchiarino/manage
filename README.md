@@ -1,4 +1,4 @@
-# manage
+# manager
 
 A new Flutter project.
 
