@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:manager/constants.dart';
+import 'package:manager/globals.dart';
 import "package:manager/screens/home/home_screen.dart";
 import "package:google_fonts/google_fonts.dart";
 
@@ -10,7 +11,8 @@ import './screens/history/histoy.dart';
 //QR
 import 'package:barcode_scan/barcode_scan.dart';
 
-
+//Global variables
+import 'package:manager/globals.dart' as global;
 
 void main() {
   runApp(MyApp());
@@ -25,8 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Manager',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        textTheme:
-            GoogleFonts.dmSansTextTheme().apply(displayColor: rText),
+        textTheme: GoogleFonts.dmSansTextTheme().apply(displayColor: rText),
         appBarTheme: AppBarTheme(
           color: Colors.transparent,
           elevation: 0,
@@ -39,7 +40,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatefulWidget {
   MyHomePage();
   @override
@@ -47,13 +47,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex;
+  
   String qrCodeResult;
 
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
   }
 
   void changePage(int index) {
@@ -81,7 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ); //barcode scnner
           setState(() {
             qrCodeResult = codeSanner.rawContent;
+            global.scanned.add(qrCodeResult);
             debugPrint(qrCodeResult);
+            debugPrint(global.scanned.toString());
           });
         },
         child: Icon(Icons.qr_code_rounded),
@@ -112,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: rPrimary,
               ),
               backgroundColor: rPrimary,
-              title: Text("Inicio")),
+              title: Text("Home")),
 
           //Previews Scans
           BubbleBottomBarItem(

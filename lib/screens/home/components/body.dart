@@ -17,7 +17,10 @@ class Body extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.all(defaultSize * 2), //20
-              child: Center(child: TitleText(title: "Palmeras",)),
+              child: Center(
+                  child: TitleText(
+                title: "Palmeras",
+              )),
             ),
             FutureBuilder(
               future: fetchProducts(),
