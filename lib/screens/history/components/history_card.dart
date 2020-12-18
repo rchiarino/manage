@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:manager/constants.dart';
 
 class HistoryCard extends StatelessWidget {
-  const HistoryCard({Key key}) : super(key: key);
+  const HistoryCard({Key key, this.product}) : super(key: key);
 
-  // final HistoryCard scan;
+  final String product;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class HistoryCard extends StatelessWidget {
                   color: Color(0xFFF5F6F9),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Image.asset("../../assets/placehold.gif"),
+                // child: Image.asset("../../assets/placehold.gif"),
               ),
             )),
         SizedBox(
@@ -30,28 +29,29 @@ class HistoryCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Title",
+            Text('$product',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
-                  
                 ),
                 maxLines: 2),
-                Text('SAIN'.toLowerCase(), style: Theme.of(context).textTheme.overline,), //CODE FROM QR
+            Text(
+              'SAIN'.toLowerCase(),
+              style: Theme.of(context).textTheme.overline,
+            ), //CODE FROM QR
             SizedBox(
               height: 10,
             ),
             Text.rich(TextSpan(
-                text: "Price",
-                style: TextStyle(fontWeight: FontWeight.w600, color: rPrimary),
-                )),
+              text: "Price",
+              style: TextStyle(fontWeight: FontWeight.w600, color: rPrimary),
+            )),
           ],
         )
       ],
     );
   }
 }
-
 
 class NoData extends StatelessWidget {
   @override
@@ -67,9 +67,13 @@ class NoData extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: rDeselect,
                   borderRadius: BorderRadius.circular(15),
-                
                 ),
-                child: Center(child: Text("NO DATA", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),)),
+                child: Center(
+                    child: Text(
+                  "NO DATA",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600, color: Colors.black),
+                )),
               ),
             )),
       ],

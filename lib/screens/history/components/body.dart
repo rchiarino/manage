@@ -3,9 +3,50 @@ import 'package:flutter/material.dart';
 import 'package:manager/globals.dart';
 import 'package:manager/screens/history/components/history_card.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  Body() : super();
+
+  @override
+  BodyState createState() => BodyState();
+}
+
+class BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+    Dismissible buildDismissible(int index, BuildContext context) {
+      return Dismissible(
+          key: Key(index.toString()),
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            setState(() {
+              scanned.removeAt(index);
+              debugPrint(scanned.toString());
+            });
+
+            Scaffold.of(context).showSnackBar(
+                SnackBar(content: Text("${scanned[index]} Deleted!")));
+          },
+          background: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: Color(0xFFFFE6E6),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              children: [
+                Spacer(),
+                Icon(
+                  Icons.delete_rounded,
+                  color: Colors.white,
+                )
+              ],
+            ),
+          ),
+          child: HistoryCard(
+            product: scanned[index],
+          ));
+    }
+
     return Container(
       child: SafeArea(
         // child: Text('${global.litems}')
@@ -22,30 +63,5 @@ class Body extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Dismissible buildDismissible(int index, BuildContext context) {
-    return Dismissible(
-        key: Key(index.toString()),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          // setState((){ //! implements a setstate for elements deleted from list.
-          //   scanned.removeAt(index);
-          // });
-
-          Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("$scanned Deleted!")));
-        },
-        background: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: Color(0xFFFFE6E6),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            children: [Spacer(), Icon(Icons.delete_forever_rounded)],
-          ),
-        ),
-        child: HistoryCard());
   }
 }

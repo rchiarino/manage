@@ -4,4 +4,4 @@ library app.globals;
 int currentIndex = 0;
 
 //qr scan history
-List scanned = [];
+List scanned = ["aaa", "bbb"];

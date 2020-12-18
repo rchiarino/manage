@@ -3,7 +3,7 @@ import 'package:manager/components/title_text.dart';
 import 'package:manager/services/products.dart';
 import 'package:manager/size_config.dart';
 
-import 'recommond_products.dart';
+import 'products_grid.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -19,14 +19,14 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(defaultSize * 2), //20
               child: Center(
                   child: TitleText(
-                title: "Palmeras",
+                title: "Plants",
               )),
             ),
             FutureBuilder(
               future: fetchProducts(),
               builder: (context, snapshot) {
                 return snapshot.hasData
-                    ? RecommandProducts(products: snapshot.data)
+                    ? ProductGrid(products: snapshot.data)
                     : Center(child: Image.asset('assets/loader.gif'));
               },
             ),

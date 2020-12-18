@@ -5,8 +5,8 @@ import 'package:manager/screens/details/details_screen.dart';
 import '../../../size_config.dart';
 import 'product_card.dart';
 
-class RecommandProducts extends StatelessWidget {
-  const RecommandProducts({
+class ProductGrid extends StatelessWidget {
+  const ProductGrid({
     Key key,
     this.products,
   }) : super(key: key);
